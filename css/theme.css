@@ -1,0 +1,325 @@
+/* ==========================
+   Black Gold Theme
+   ========================== */
+
+:root {
+  --bg: #0d0d0d;           /* 主背景深黑 */
+  --bg-alt: #161616;       /* 區塊背景 */
+  --text: #f5f5f5;         /* 主要文字 */
+  --muted: #b3b3b3;        /* 次要文字 */
+  --primary: #d4af37;      /* 金色亮點 */
+  --primary-glow: #ffef99; /* 高光用 */
+  --border: #2a2a2a;
+  --radius: 10px;
+}
+
+/* 背景與字體顏色 */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ==========================
+   Header
+   ========================== */
+.site-header {
+  background: rgba(13,13,13,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-list a {
+  color: var(--muted);
+}
+.nav-list a:hover {
+  color: var(--primary);
+}
+.nav-toggle {
+  background: var(--primary);
+  color: #000;
+}
+
+/* ==========================
+   Hero
+   ========================== */
+.hero {
+  background: radial-gradient(circle at 50% 30%, #1a1a1a, #000);
+  text-align: center;
+  padding: 120px 20px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero h1 {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+.hero .lead {
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* ==========================
+   Buttons
+   ========================== */
+.btn.primary {
+  background: var(--primary);
+  color: #000;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 0 10px rgba(212,175,55,0.3);
+}
+.btn.primary:hover {
+  box-shadow: 0 0 20px rgba(212,175,55,0.5);
+  transform: translateY(-2px);
+}
+.btn.ghost {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+.btn.ghost:hover {
+  background: var(--primary);
+  color: #000;
+}
+
+/* ==========================
+   Section Dividers
+   ========================== */
+.section::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
+  margin-bottom: 40px;
+}
+
+/* ==========================
+   Feature Cards
+   ========================== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 24px;
+}
+.feature {
+  background: var(--bg-alt);
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: all .3s;
+}
+.feature:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px rgba(212,175,55,0.15);
+  transform: translateY(-3px);
+}
+.feature h3 {
+  color: var(--primary);
+  margin-bottom: .5rem;
+}
+.feature p {
+  color: var(--muted);
+}
+
+/* ==========================
+   Footer
+   ========================== */
+.site-footer {
+  background: #000;
+  color: var(--muted);
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  font-size: .9rem;
+}
+.site-footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================
+   Global Footer
+   ========================== */
+.site-footer {
+  background: #000;
+  color: var(--muted);
+  text-align: center;
+  padding: 40px 0 0;
+  border-top: 1px solid var(--border);
+  font-size: .9rem;
+}
+.site-footer strong {
+  color: var(--primary);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 16px 0 0;
+  padding: 0;
+}
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+/* ==========================
+   Legal Notice — 全站共用
+   ========================== */
+.legal-safe {
+  background: rgba(25,25,25,0.9);
+  border-top: 1px solid rgba(212,175,55,0.25);
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.legal-safe strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+@media (max-width:768px) {
+  .legal-safe { font-size: 0.8rem; padding: 20px 12px; }
+  .footer-links { flex-wrap: wrap; gap: 10px; }
+}
+
+/* ==========================
+   Hero & Header Contrast Fix
+   (for Black Gold Theme)
+   ========================== */
+
+/* 桌機固定導覽列對比加強 */
+@media (min-width:1025px) {
+  .site-header {
+    background: rgba(8, 8, 8, 0.9);
+    backdrop-filter: blur(12px) saturate(120%);
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .nav-list a {
+    color: #f5f5f5; /* 更亮的白 */
+    font-weight: 500;
+  }
+  .nav-list a:hover {
+    color: var(--primary);
+  }
+}
+
+/* 手機：保留半透明但提升亮度 */
+@media (max-width:1024px) {
+  .site-header {
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* ==========================
+   Hero 區調整：暗底亮字
+   ========================== */
+.hero,
+.hero.bright {
+  background: radial-gradient(circle at 50% 30%, #151515, #000);
+  color: var(--text);
+}
+.hero h1 {
+  color: var(--primary);
+}
+.hero .lead {
+  color: var(--muted);
+}
+
+/* ==========================
+   按鈕微調：在暗底上對比更明顯
+   ========================== */
+.btn.primary {
+  background: var(--primary);
+  color: #000;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(212,175,55,0.35);
+}
+.btn.primary:hover {
+  box-shadow: 0 0 22px rgba(212,175,55,0.6);
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   Fixed Header — Black Gold Final
+   ========================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.88); /* 固定深黑背景 */
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  border-bottom: 1px solid rgba(212,175,55,0.25);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  transition: background .3s ease, box-shadow .3s ease;
+}
+
+/* 內部容器確保置中對齊 */
+.site-header .nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* nav link 顏色 */
+.nav-list a {
+  color: #fdfdfd; /* 提高亮度 */
+  font-weight: 500;
+  transition: color .25s ease;
+}
+.nav-list a:hover {
+  color: var(--primary);
+}
+
+/* 手機選單按鈕 */
+.nav-toggle {
+  background: var(--primary);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 600;
+}
+
+/* Hero 往下推避免被遮住 */
+.hero {
+  padding-top: 140px; /* 頂部預留空間，避免 header 蓋住第一行 */
+}
+
+/* 當滾動時增加陰影層感 */
+body.scrolled .site-header {
+  background: rgba(5, 5, 5, 0.95);
+  box-shadow: 0 2px 18px rgba(0,0,0,0.6);
+}

@@ -1,0 +1,25 @@
+.tech-slider {
+  position: relative;
+  overflow: hidden;
+  padding: 16px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}
+.tech-track {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  will-change: transform;
+}
+.tech-track img {
+  height: 36px;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.1) brightness(.95);
+  opacity: .9;
+  transition: filter .2s ease, opacity .2s ease, transform .2s ease;
+}
+.tech-track img:hover {
+  filter: grayscale(0) brightness(1.1);
+  opacity: 1;
+  transform: translateY(-2px);
+}
