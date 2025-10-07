@@ -1,89 +1,53 @@
-// ================================
-// lang.js — 全域多語系控制
-// ================================
-
-// 語言設定表（集中管理）
-const LANGS = [
-  { code: "en",    label: "EN"   },
-  { code: "zh-TW", label: "繁中" },
-  { code: "zh-CN", label: "简中" }
-];
-const LANG_PATH = "./lang/";
-
-// 自動判斷瀏覽器語言
-let browserLang = navigator.language || navigator.userLanguage;
-let currentLang =
-  localStorage.getItem("lang") ||
-  (browserLang.startsWith("zh-TW")
-    ? "zh-TW"
-    : browserLang.startsWith("zh-CN")
-    ? "zh-CN"
-    : "en");
-
-// -----------------------------
-// 初始化語言切換按鈕
-// -----------------------------
-function buildLangMenu() {
-  const container = document.getElementById("lang-switch");
-  if (!container) return;
-
-  container.innerHTML = ""; // 清空舊內容
-  LANGS.forEach(({ code, label }) => {
-    const btn = document.createElement("button");
-    btn.textContent = label;
-    btn.dataset.setlang = code;
-    btn.setAttribute("aria-pressed", code === currentLang);
-    if (code === currentLang) btn.classList.add("active");
-    container.appendChild(btn);
-  });
-}
-
-// -----------------------------
-// 載入對應語言 JSON 並套用
-// -----------------------------
-function loadAndApply(lang) {
-  fetch(`${LANG_PATH}${lang}.json`)
-    .then((res) => res.json())
-    .then((data) => {
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.getAttribute("data-i18n");
-        if (data[key]) el.textContent = data[key];
-      });
-      updateLangMenu(lang);
-    })
-    .catch((err) => console.error("語言載入失敗：", err));
-}
-
-// -----------------------------
-// 更新按鈕狀態
-// -----------------------------
-function updateLangMenu(lang) {
-  document.querySelectorAll("[data-setlang]").forEach((btn) => {
-    const active = btn.dataset.setlang === lang;
-    btn.setAttribute("aria-pressed", active);
-    btn.classList.toggle("active", active);
-  });
-}
-
-// -----------------------------
-// 事件與初始化
-// -----------------------------
+// lang-dropdown.js
 document.addEventListener("DOMContentLoaded", () => {
-  buildLangMenu();
-  loadAndApply(currentLang);
-});
+  const dropdown = document.getElementById("lang-dropdown");
+  if (!dropdown) return;
 
-document.addEventListener("partials:loaded", () => {
-  buildLangMenu();
-  loadAndApply(currentLang);
-});
+  // 定義所有可用語言（顯示名稱、代碼）
+  const LANGUAGES = [
+    { code: "en", label: "English" },
+    { code: "ms", label: "Bahasa Melayu" },
+    { code: "zh-CN", label: "简体中文" },
+    { code: "zh-TW", label: "繁體中文" },
+  ];
 
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest("[data-setlang]");
-  if (!btn) return;
-  const newLang = btn.dataset.setlang;
-  if (newLang === currentLang) return;
-  currentLang = newLang;
-  localStorage.setItem("lang", newLang);
-  loadAndApply(newLang);
+  // 從 localStorage 或瀏覽器語言判定當前語言
+  let currentLang = localStorage.getItem("lang") || "en";
+  const browserLang = navigator.language || navigator.userLanguage;
+  if (!localStorage.getItem("lang")) {
+    if (browserLang.startsWith("zh-TW")) currentLang = "zh-TW";
+    else if (browserLang.startsWith("zh")) currentLang = "zh-CN";
+    else if (browserLang.startsWith("ms")) currentLang = "ms";
+  }
+
+  // 建立按鈕與選單
+  const button = document.createElement("button");
+  button.id = "lang-btn";
+  button.textContent = LANGUAGES.find(l => l.code === currentLang)?.label || "English";
+
+  const menu = document.createElement("ul");
+  LANGUAGES.forEach(lang => {
+    const li = document.createElement("li");
+    li.textContent = lang.label;
+    li.dataset.setlang = lang.code;
+    li.addEventListener("click", () => {
+      localStorage.setItem("lang", lang.code);
+      location.reload(); // 或改用你的 lang.js 即時切換
+    });
+    menu.appendChild(li);
+  });
+
+  dropdown.appendChild(button);
+  dropdown.appendChild(menu);
+
+  // 點擊展開/收合
+  button.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.classList.toggle("show");
+  });
+
+  // 點外層收回
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) menu.classList.remove("show");
+  });
 });
