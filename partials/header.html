@@ -1,24 +1,24 @@
-<header id="top" role="banner" class="site-header">
+<header class="site-header apple-style">
   <div class="container nav-container">
-    <a class="brand" href="index.html" aria-label="Andy home">
-      <img class="brand-logo" src="./assets/logo.svg" alt="Andy logo" />
-      <strong data-i18n="brand.name">Andy</strong>
-      <span class="brand-sub" data-i18n="brand.role">System Engineer</span>
+    <a class="brand" href="index.html" aria-label="Aplus Systems home">
+      <img src="./assets/logo.svg" alt="Aplus Systems logo" class="brand-logo">
+      <span class="brand-name">Aplus Systems</span>
     </a>
 
-    <nav aria-label="Main navigation">
-      <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false" data-i18n="nav.menu">Menu</button>
-      <ul id="site-nav" class="nav-list">
+    <nav class="main-nav">
+      <ul class="nav-list">
         <li><a href="about.html" data-i18n="nav.about">About</a></li>
         <li><a href="services.html" data-i18n="nav.services">Services</a></li>
-			<li><a href="technologies.html" data-i18n="nav.technologies">Technologies</a></li>
+        <li><a href="technologies.html" data-i18n="nav.tech">Technologies</a></li>
         <li><a href="demos.html" data-i18n="nav.demos">Demos</a></li>
-        <li><a href="process.html" data-i18n="nav.process">Process</a></li>
         <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
-
-        <!-- 語言選單自動生成 -->
-        <li class="lang-switch" id="lang-switch"></li>
       </ul>
     </nav>
+
+    <div class="actions">
+      <div id="lang-dropdown" class="lang-dropdown"></div>
+    </div>
+
+    <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false">☰</button>
   </div>
 </header>
