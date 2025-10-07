@@ -323,3 +323,67 @@ body.scrolled .site-header {
   background: rgba(5, 5, 5, 0.95);
   box-shadow: 0 2px 18px rgba(0,0,0,0.6);
 }
+
+/* === 統一黑金版 Header（所有頁一致） === */
+.site-header{
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,8,8,.72);
+  backdrop-filter: blur(10px) saturate(110%);
+  -webkit-backdrop-filter: blur(10px) saturate(110%);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.site-header .brand strong,
+.site-header .brand .brand-sub{ color:#f5f5f5; }
+
+/* 滾動後更實心，提升對比 */
+.site-header.fixed{
+  background: rgba(10,10,10,.92);
+  box-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
+
+/* 桌機 nav 字色、Hover、Active */
+.nav-list a{
+  color:#eee;                     /* 高對比 */
+  text-decoration: none;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+.nav-list a:hover,
+.nav-list a:focus-visible{
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(212,175,55,.25);
+}
+/* 指定目前頁（用 aria-current 或 .is-active） */
+.nav-list a[aria-current="page"],
+.nav-list a.is-active{
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* 語言切換在黑底下的對比 */
+.lang-switch button{
+  color:#ddd;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.04);
+}
+.lang-switch button:hover{ color:#fff; border-color: rgba(255,255,255,.3); }
+
+/* === Hero 區在黑金主題下統一用暗底（即使 .bright 也不會太淺） === */
+.hero.bright{
+  background:
+    radial-gradient(1200px 600px at 50% 0%, rgba(212,175,55,.09), transparent 70%),
+    linear-gradient(180deg, #0e0e0f 0%, #111112 100%);
+  color: var(--text);
+}
+.hero.bright h1,
+.hero.bright p{ color: var(--text); }
+.hero .btn.primary{ background: var(--primary); color:#000; }
+
+/* 手機展開選單時，覆蓋背景透明問題 */
+@media (max-width:1024px){
+  .site-header{ background: rgba(8,8,8,.9); }
+  .nav-list.is-open{
+    background: rgba(10,10,11,.98);
+    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+}
